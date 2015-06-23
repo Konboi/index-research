@@ -6,9 +6,9 @@ my $u = 'root';
 my $p = '';
 my $dbh = DBI->connect($d, $u, $p);
 
-for my $table ('no_index', 'one_index', 'both_index') {
+for my $table ('no_index', 'one_index', 'both_index', 'uniq_index') {
     for my $player_id (1..2000) {
-        for my $index_id (1..100) {
+        for my $index_id (1..200) {
             my $sql = "INSERT INTO  $table (player_id, index_id) VALUES ($player_id, $index_id)";
             my $sth = $dbh->prepare($sql);
             $sth->execute;

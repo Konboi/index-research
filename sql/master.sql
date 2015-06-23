@@ -26,3 +26,13 @@ CREATE TABLE `both_index` (
   INDEX `player_id_index_id_idx` (`player_id`, `index_id`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;
+
+DROP TABLE IF EXISTS `uniq_index`;
+
+CREATE TABLE `uniq_index` (
+  `id` INTEGER unsigned NOT NULL auto_increment,
+  `player_id` INTEGER unsigned NOT NULL DEFAULT 0,
+  `index_id` INTEGER unsigned NOT NULL DEFAULT 0,
+  UNIQUE `uniq_index_player_id_index_id` (`player_id`, `index_id`),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;

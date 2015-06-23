@@ -35,6 +35,15 @@ my $result = timethese(10, {
             $sth->finish;
         }
     },
+    'player_id index_id use uniq index' => sub {
+        for my $id (1..100) {
+            my $player_id = $id * 20;
+            my $sql = "SELECT * FROM uniq_index WHERE player_id = $player_id  AND index_id = $id";
+            my $sth = $dbh->prepare($sql);
+            $sth->execute;
+            $sth->finish;
+        }
+    },
 });
 
 cmpthese $result;
@@ -63,6 +72,15 @@ my $result_only_player_id = timethese(10, {
         for my $id (1..100) {
             my $player_id = $id * 20;
             my $sql = "SELECT * FROM both_index WHERE player_id = $player_id";
+            my $sth = $dbh->prepare($sql);
+            $sth->execute;
+            $sth->finish;
+        }
+    },
+    'player_id use uniq index' => sub {
+        for my $id (1..100) {
+            my $player_id = $id * 20;
+            my $sql = "SELECT * FROM uniq_index WHERE player_id = $player_id";
             my $sth = $dbh->prepare($sql);
             $sth->execute;
             $sth->finish;
